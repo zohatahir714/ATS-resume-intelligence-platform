@@ -1,15 +1,18 @@
-# Meta files
-meta/
-
-# Environment variables
-.env
-.env.local
-
 # Dependencies
 node_modules/
 
 # Next.js
 .next/
 
+# Environment variables
+.env*
+!.env.example
+
 # Logs
 *.log
+
+# Vercel
+.vercel/
+
+# Your private planning docs
+meta/
