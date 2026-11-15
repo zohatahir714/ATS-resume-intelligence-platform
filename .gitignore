@@ -1,0 +1,15 @@
+# Meta files
+meta/
+
+# Environment variables
+.env
+.env.local
+
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+
+# Logs
+*.log
