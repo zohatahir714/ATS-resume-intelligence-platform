@@ -1,8 +1,16 @@
 # Dependencies
 node_modules/
+.pnp
+.pnp.*
 
 # Next.js
 .next/
+out/
+build/
+next-env.d.ts
+
+# TypeScript
+*.tsbuildinfo
 
 # Environment variables
 .env*
@@ -10,6 +18,10 @@ node_modules/
 
 # Logs
 *.log
+
+# Misc
+.DS_Store
+*.pem
 
 # Vercel
 .vercel/
