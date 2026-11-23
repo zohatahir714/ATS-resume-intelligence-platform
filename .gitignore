@@ -26,5 +26,10 @@ next-env.d.ts
 # Vercel
 .vercel/
 
+# Testing
+coverage/
+playwright-report/
+test-results/
+
 # Your private planning docs
 meta/
