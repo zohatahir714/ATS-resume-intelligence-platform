@@ -32,4 +32,4 @@ playwright-report/
 test-results/
 
 # Your private planning docs
-meta/
+/meta/
