@@ -1,9 +1,11 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  DASHBOARD_PATH,
   isProtectedPath,
   LOGIN_PATH,
   PROTECTED_PATH_PREFIXES,
+  toSafeRedirectPath,
 } from "@/lib/supabase/routes";
 
 describe("isProtectedPath", () => {
@@ -42,5 +44,27 @@ describe("isProtectedPath", () => {
 
   it("uses /login as the redirect target", () => {
     expect(LOGIN_PATH).toBe("/login");
+  });
+
+  it("lands signed-in users on a protected page", () => {
+    expect(isProtectedPath(DASHBOARD_PATH)).toBe(true);
+  });
+});
+
+describe("toSafeRedirectPath", () => {
+  it("keeps a same-origin path", () => {
+    expect(toSafeRedirectPath("/resumes")).toBe("/resumes");
+    expect(toSafeRedirectPath("/analyses/new")).toBe("/analyses/new");
+  });
+
+  it.each([
+    null,
+    "",
+    "https://evil.example/dashboard",
+    "//evil.example",
+    "/\\evil.example",
+    "dashboard",
+  ])("falls back to the dashboard for %s", (raw) => {
+    expect(toSafeRedirectPath(raw)).toBe(DASHBOARD_PATH);
   });
 });
