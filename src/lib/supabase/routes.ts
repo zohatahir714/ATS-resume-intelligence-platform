@@ -9,6 +9,10 @@
 
 export const LOGIN_PATH = "/login";
 
+export const SIGNUP_PATH = "/signup";
+
+export const DASHBOARD_PATH = "/dashboard";
+
 export const PROTECTED_PATH_PREFIXES = [
   "/dashboard",
   "/analyses",
@@ -33,4 +37,25 @@ export function isProtectedPath(pathname: string): boolean {
   return PROTECTED_PATH_PREFIXES.some(
     (prefix) => normalized === prefix || normalized.startsWith(`${prefix}/`),
   );
+}
+
+/**
+ * Where to go after signing in.
+ *
+ * Accepts only a same-origin path. Anything else — an absolute URL, a
+ * protocol-relative `//host` (which browsers read as another site), a backslash
+ * variant of it, or an empty value — falls back to `/dashboard`, so the
+ * `?next=` parameter the OAuth callback reads can never turn into an open
+ * redirect.
+ */
+export function toSafeRedirectPath(raw: string | null): string {
+  if (raw === null) {
+    return DASHBOARD_PATH;
+  }
+
+  if (!raw.startsWith("/") || raw.startsWith("//") || raw.startsWith("/\\")) {
+    return DASHBOARD_PATH;
+  }
+
+  return raw;
 }
