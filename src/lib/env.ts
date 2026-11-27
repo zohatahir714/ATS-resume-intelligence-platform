@@ -1,6 +1,8 @@
 import { z } from "zod";
 
-import { AppError } from "@/lib/errors";
+// Relative, not `@/lib/errors`: `next.config.ts` imports this module through a
+// loader that does not resolve tsconfig path aliases.
+import { AppError } from "./errors";
 
 /**
  * The only place the app reads environment variables (AGENTS.md).
